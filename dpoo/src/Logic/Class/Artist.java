@@ -15,8 +15,8 @@ public class Artist {
 * 
 */
     public Artist(String name, String bio) {
-        this.name = name;
-        this.bio = bio;
+        this.setName(name);
+        this.setBio(bio);
     }
     
 /*
@@ -33,7 +33,14 @@ public class Artist {
     public String getBio() {
         return bio;
     }
+
     public void setBio(String bio) {
         this.bio = bio;
     }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
 }

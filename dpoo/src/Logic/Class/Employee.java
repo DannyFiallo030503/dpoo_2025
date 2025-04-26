@@ -21,13 +21,13 @@ public class Employee {
 */
     public Employee(String firstName, String lastName, String idNumber, String employeeNumber, double salary,
             String educationLevel, String role) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.idNumber = idNumber;
-        this.employeeNumber = employeeNumber;
-        this.salary = salary;
-        this.educationLevel = educationLevel;
-        this.role = role;
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setIdNumber(idNumber);
+        this.setEmployeeNumber(employeeNumber);
+        this.setSalary(salary);
+        this.setEducationLevel(educationLevel);
+        this.setRole(role);
     }
     
 /*
@@ -74,7 +74,14 @@ public class Employee {
     public String getRole() {
         return role;
     }
+
     public void setRole(String role) {
         this.role = role;
     }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
 }

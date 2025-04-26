@@ -6,7 +6,7 @@ import Logic.Abstract.MusicalProduct;
 import Logic.Enum.SolidDisc;
 import Logic.Interface.MultimediaContent;
 
-public class Disc extends MusicalProduct{
+public class Disc extends MusicalProduct {
 /*
 * 
 * -------------Attributes---------------
@@ -21,7 +21,7 @@ public class Disc extends MusicalProduct{
 */
     public Disc(double price, SolidDisc mediaType, ArrayList<MultimediaContent> content) {
         super(price, mediaType);
-        this.content = content;
+        this.setContent(content);
     }
 /*
 * 
@@ -35,4 +35,10 @@ public class Disc extends MusicalProduct{
     public void setContent(ArrayList<MultimediaContent> content) {
         this.content = content;
     }
+
+/*
+* 
+* -------------Methods---------------
+* 
+*/
 }
