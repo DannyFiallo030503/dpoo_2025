@@ -2,8 +2,10 @@ package Logic;
 
 import java.time.DateTimeException;
 import java.time.YearMonth;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
+
+import Logic.Class.Employee;
 
 public class Utils {
     private static String numero;
@@ -38,7 +40,11 @@ public class Utils {
     }
 
     // Genera número de trabajador único (8 dígitos que empiezan en 5 o 7)
-    public static String generarNumeroTrabajadorUnico(List<Employee> empleados) {
+    public static String generarNumeroTrabajadorUnico(ArrayList<Employee> empleados) {
+        if (empleados == null) {
+            empleados = new ArrayList<>(); 
+        }
+
         Random random = new Random();
         boolean esUnico;
         int intentos = 0;
@@ -48,7 +54,7 @@ public class Utils {
             int primerDigito = random.nextBoolean() ? 5 : 7;
             int resto = random.nextInt(10000000);
             numero = String.format("%d%07d", primerDigito, resto);
-            esUnico = empleados.stream().noneMatch(e -> numero.equals(e.getNumeroTrabajador()));
+            esUnico = empleados.stream().noneMatch(e -> numero.equals(e.getEmployeeNumber()));
             intentos++;
         } while (!esUnico && intentos < MAX_INTENTOS);
 
@@ -72,14 +78,5 @@ public class Utils {
     // Método adicional sugerido: Validar formato de email
     public static boolean validarEmail(String email) {
         return email != null && email.matches("^[\\w.-]+@[\\w.-]+\\.\\w{2,}$");
-    }
-}
-
-class Employee {
-    private String numeroTrabajador;
-
-    // Getters y setters
-    public String getNumeroTrabajador() {
-        return numeroTrabajador;
     }
 }

@@ -1,6 +1,10 @@
 package Logic.Class;
 
-public class VideoClip {
+import java.util.ArrayList;
+
+import Logic.Abstract.MediaContentBase;
+
+public class VideoClip extends MediaContentBase{
 /*
  * 
  * -------------Attributes---------------
@@ -13,11 +17,12 @@ public class VideoClip {
  * -------------Constructors---------------
  * 
  */
+public VideoClip(String title, String genre, int duration, Artist author, Artist performer,
+        ArrayList<Artist> collaborators, double fileSize, String resolution) {
+    super(title, genre, duration, author, performer, collaborators, fileSize);
+    this.setResolution(resolution);
+}
 
-    public VideoClip(String resolution) {
-        this.resolution = resolution;
-    }
-    
 /*
  * 
  * -------------Gets and Sets---------------
@@ -30,5 +35,21 @@ public class VideoClip {
 
     public void setResolution(String resolution) {
         this.resolution = resolution;
+    }
+
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    @Override
+    public double calculateSize() {
+        return 0;
+    }
+
+    @Override
+    public void print() {
+        super.print();
     }
 }

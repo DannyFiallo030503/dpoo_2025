@@ -16,9 +16,9 @@ public class RecordingService {
 * 
 */
     public RecordingService(double baseCost, double dataCostPerGB, double dataSizeGB) {
-        this.baseCost = baseCost;
-        this.dataCostPerGB = dataCostPerGB;
-        this.dataSizeGB = dataSizeGB;
+        this.setBaseCost(baseCost);
+        this.setDataCostPerGB(dataCostPerGB);
+        this.setDataSizeGB(dataSizeGB);
     }
 
 /*
@@ -41,7 +41,17 @@ public class RecordingService {
     public double getDataSizeGB() {
         return dataSizeGB;
     }
+
     public void setDataSizeGB(double dataSizeGB) {
         this.dataSizeGB = dataSizeGB;
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    public void print() {
+            
     }
 }

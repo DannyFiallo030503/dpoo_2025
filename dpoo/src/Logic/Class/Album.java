@@ -17,8 +17,8 @@ public class Album {
 * 
 */
     public Album(String title, ArrayList<Song> songs) {
-        this.title = title;
-        this.songs = songs;
+        this.setTitle(title);
+        this.setSongs(songs);
     }
     
 /*
@@ -35,8 +35,14 @@ public class Album {
     public ArrayList<Song> getSongs() {
         return songs;
     }
+
     public void setSongs(ArrayList<Song> songs) {
         this.songs = songs;
     }
-
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
 }
