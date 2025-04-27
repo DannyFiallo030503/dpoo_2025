@@ -46,4 +46,9 @@ public Song(String title, String genre, int duration, Artist author, Artist perf
         return 0;
     }
 
+    @Override
+    public void print() {
+        super.print();
+    }
+
 }

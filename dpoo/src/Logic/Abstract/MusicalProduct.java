@@ -51,4 +51,9 @@ public abstract class MusicalProduct implements PricingStrategy {
         return 0;
     }
 
+    public void print() {
+        System.out.println("Price: " + this.price);
+        System.out.println("Media Type: " + this.mediaType);
+    }
+
 }

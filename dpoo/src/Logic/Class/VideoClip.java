@@ -46,5 +46,10 @@ public VideoClip(String title, String genre, int duration, Artist author, Artist
     @Override
     public double calculateSize() {
         return 0;
-}
+    }
+
+    @Override
+    public void print() {
+        super.print();
+    }
 }

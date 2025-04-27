@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Logic.Class.Artist;
 import Logic.Interface.MultimediaContent;
 
-public abstract class MediaContentBase implements MultimediaContent{
+public abstract class MediaContentBase implements MultimediaContent {
 /*
 * 
 * -------------Attributes---------------
@@ -89,5 +89,7 @@ public abstract class MediaContentBase implements MultimediaContent{
 * -------------Methods---------------
 * 
 */
-
+    public void print() {
+            
+    }
 }

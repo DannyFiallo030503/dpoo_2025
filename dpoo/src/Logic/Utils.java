@@ -2,7 +2,7 @@ package Logic;
 
 import java.time.DateTimeException;
 import java.time.YearMonth;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 import Logic.Class.Employee;
@@ -40,7 +40,11 @@ public class Utils {
     }
 
     // Genera número de trabajador único (8 dígitos que empiezan en 5 o 7)
-    public static String generarNumeroTrabajadorUnico(List<Employee> empleados) {
+    public static String generarNumeroTrabajadorUnico(ArrayList<Employee> empleados) {
+        if (empleados == null) {
+            empleados = new ArrayList<>(); 
+        }
+
         Random random = new Random();
         boolean esUnico;
         int intentos = 0;

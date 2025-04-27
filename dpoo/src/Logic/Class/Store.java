@@ -99,4 +99,28 @@ public class Store {
 * -------------Methods---------------
 * 
 */
+
+public void print() {
+    System.out.println("-----Store-----");
+    System.out.println("Name: " + this.name);
+    System.out.println("Address: " + this.address);
+    System.out.println("Phone: " + this.phone);
+    System.out.println("Manager: ");
+    this.manager.print();
+    System.out.println("Employees: ");
+    for (Employee e : this.employees) {
+        System.out.println("Employee: ");
+        e.print();
+    }
+    System.out.println("Products: ");
+    for (MusicalProduct m : products) {
+        System.out.println("Product: ");
+        m.print();
+    }
+    System.out.println("Recodins Services: ");
+    for (RecordingService r : customRecordingServices) {
+        System.out.println("Rec. Serv.: ");
+        r.print();
+    }
+}
 }

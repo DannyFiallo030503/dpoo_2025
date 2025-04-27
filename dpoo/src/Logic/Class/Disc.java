@@ -41,4 +41,13 @@ public class Disc extends MusicalProduct {
 * -------------Methods---------------
 * 
 */
+    @Override
+    public void print() {
+        System.out.println("-----Disc-----");
+        super.print();
+        for (MultimediaContent m : content) {
+            System.out.println("Content: ");
+            m.print();
+        }
+    }
 }

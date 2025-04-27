@@ -1,6 +1,8 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import Logic.Class.Employee;
+import Logic.Class.Store;
+import Logic.Enum.EducationLevel;
 import Logic.Utils;
 
 public class App {
@@ -34,11 +36,22 @@ public class App {
         // Prueba de validarEmail
         System.out.println("\n6. Prueba de validarEmail:");
         testValidarEmail();
+
+        System.out.println("=== Pruebas de la clase Store ===");
+        System.out.println("\n1. Crear instancia:");
+        Employee manager = new Employee("Juan", "Perez", "01030458789", 1000, EducationLevel.Higher, "Asistente", null);
+        System.out.println("Manager: ");
+        manager.print();
+        Store store = new Store("tienda", "av57 %152&156 #152007", "58940032", manager, LocalDate.now());
+        System.out.println("Store: ");
+        store.print();
+
+        System.out.println("\n2. Crear Employees:");
     }
 
     private static void testValidarCarnetIdentidad() {
         // Carnets válidos
-        String[] validos = { "00010112345", "99123198765", "01022954321" }; // 29 de feb (año bisiesto)
+        String[] validos = { "00010112345", "99123198765", "01022954321" };
         // Carnets inválidos
         String[] invalidos = { "00013212345", "991231", "01023054321", "abcdefghijk", "0001011234X" };
 
@@ -61,10 +74,11 @@ public class App {
     }
 
     private static void testGenerarNumeroTrabajadorUnico() {
-        List<Employee> empleados = new ArrayList<>();
+        ArrayList<Employee> empleados = new ArrayList<Employee>();
         empleados.add(
-                new Employee("Juan", "Pérez", "85010112345", "70000001", 2500.0, "Universitario", "Desarrollador"));
-        empleados.add(new Employee("Ana", "Gómez", "90050554321", "50012345", 3000.0, "Master", "Gerente"));
+                new Employee("Juan", "Pérez", "85010112345", 2500.0, EducationLevel.University, "Desarrollador", (ArrayList<Employee>) empleados));
+        empleados.add(new Employee("Ana", "Gómez", "90050554321", 3000.0, EducationLevel.Higher, "Gerente", 
+                (ArrayList<Employee>) empleados));
 
         System.out.println("Empleados existentes:");
         empleados.forEach(e -> System.out.println(e.getEmployeeNumber()));
@@ -75,7 +89,7 @@ public class App {
             System.out.println(nuevoNumero);
             // Agregamos a la lista para probar unicidad
             empleados.add(
-                    new Employee("Temp" + i, "Temp", "0101010000" + i, nuevoNumero, 1000.0, "Técnico", "Temporal"));
+                    new Employee("Temp" + i, "Temp", "0101010000" + i, 1000.0, EducationLevel.Secondary, "Temporal", empleados));
         }
     }
 
