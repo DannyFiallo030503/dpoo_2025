@@ -10,10 +10,13 @@ import Logic.Class.VideoClip;
 import Logic.Enum.EducationLevel;
 import Logic.Interface.MultimediaContent;
 import Logic.Utils;
+import Visual.Screen;
 
 public class App {
     public static void main(String[] args) {
-        test();
+        // test();
+        Screen screen = new Screen();
+        screen.setVisible(true);
     }
 
     private static void test() {
@@ -60,8 +63,8 @@ public class App {
         MultimediaContent m = new Song("null", "null", 1, new Artist("b", "c"), new Artist("null", "null"), a, 2,
                 new Album("null", null));
         m.print();
-        System.out.println(m instanceof Song);
-        System.out.println(m instanceof VideoClip);
+        // System.out.println(m instanceof Song);
+        // System.out.println(m instanceof VideoClip);
 
 
     }

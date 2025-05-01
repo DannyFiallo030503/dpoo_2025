@@ -1,0 +1,1375 @@
+
+
+// ===== Archivo: dpoo/src/Logic/Enum/SolidDisc.java =====
+
+package Logic.Enum;
+
+public enum SolidDisc {
+    CD,
+    DVD
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Enum/EducationLevel.java =====
+
+package Logic.Enum;
+
+public enum EducationLevel {
+    Primary,
+    Secondary,
+    Higher,
+    University
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Abstract/MusicalProduct.java =====
+
+package Logic.Abstract;
+
+import Logic.Utils;
+import Logic.Enum.SolidDisc;
+import Logic.Interface.PricingStrategy;
+
+public abstract class MusicalProduct implements PricingStrategy {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    protected double price;
+    protected SolidDisc mediaType;
+    
+/*
+* 
+* -------------Constructures---------------
+* 
+*/
+    public MusicalProduct(double price, SolidDisc mediaType) {
+        this.setPrice(price);
+        this.setMediaType(mediaType);
+    }
+    
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        if (Utils.validarRangoDouble(price, 1, 10000)) {
+            this.price = price;
+        } else {
+            throw new IllegalArgumentException("The minimum price must be 1 and the maximum is around 10,000.");
+        }
+        
+    }
+    public SolidDisc getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(SolidDisc mediaType) {
+        this.mediaType = mediaType;
+    }
+
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    @Override
+    public double calculatePrice() {
+        return 0;
+    }
+
+    public void print() {
+        System.out.println("Price: " + this.price);
+        System.out.println("Media Type: " + this.mediaType);
+    }
+
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Abstract/MediaContentBase.java =====
+
+package Logic.Abstract;
+
+import java.util.ArrayList;
+
+import Logic.Utils;
+import Logic.Class.Artist;
+import Logic.Interface.MultimediaContent;
+
+public abstract class MediaContentBase implements MultimediaContent {
+    /*
+     * 
+     * -------------Attributes---------------
+     * 
+     */
+    protected String title;
+    protected String genre;
+    protected int duration;
+    protected Artist author;
+    protected Artist performer;
+    protected ArrayList<Artist> collaborators;
+    protected double fileSize;
+
+    /*
+     * 
+     * -------------Constructors---------------
+     * 
+     */
+    public MediaContentBase(String title, String genre, int duration, Artist author, Artist performer,
+            ArrayList<Artist> collaborators, double fileSize) {
+        this.setTitle(title);
+        this.setGenre(genre);
+        this.setDuration(duration);
+        this.setAuthor(author);
+        this.setPerformer(performer);
+        this.setCollaborators(collaborators);
+        this.setFileSize(fileSize);
+    }
+
+    /*
+     * 
+     * -------------Gets and seters---------------
+     * 
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        if (Utils.validarSoloLetras(title)) {
+            this.title = title;
+        } else {
+            throw new IllegalArgumentException("The title contains numbers or strange characters.");
+        }
+
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        if (Utils.validarSoloLetras(genre)) {
+            this.genre = genre;
+        } else {
+            throw new IllegalArgumentException("The genre contains numbers or strange characters.");
+        }
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        if (Utils.validarRangoInt(duration, 1, 30000)) {
+            this.duration = duration;
+        } else {
+            throw new IllegalArgumentException("The duration cannot be less than 1 nor greater than 30000");
+        }
+
+    }
+
+    public Artist getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Artist author) {
+        this.author = author;
+    }
+
+    public Artist getPerformer() {
+        return performer;
+    }
+
+    public void setPerformer(Artist performer) {
+        this.performer = performer;
+    }
+
+    public ArrayList<Artist> getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(ArrayList<Artist> collaborators) {
+        this.collaborators = collaborators;
+    }
+
+    public double getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(double fileSize) {
+        if (Utils.validarRangoDouble(fileSize, 0.1, Double.MAX_VALUE)) {
+            this.fileSize = fileSize;
+        } else {
+            throw new IllegalArgumentException("The file size cannot be less than 0.1 nor greater than 1 T.");
+        }
+
+    }
+
+    /*
+     * 
+     * -------------Methods---------------
+     * 
+     */
+    @Override
+    public void print() {
+        System.out.println("-----MediaContentBase-----");
+        System.out.println("Title: " + title);
+        System.out.println("Gener: " + genre);
+        System.out.println("Duration: " + duration);
+        System.out.println("Autor: ");
+        author.print();
+        System.out.println("Performer: ");
+        performer.print();
+        System.out.println("Colaborators: ");
+        for (Artist a : collaborators) {
+            System.out.println("-----Colaborator-----");
+            a.print();
+        }
+        System.out.println("File Size: " + fileSize);
+    }
+
+    @Override
+    public Artist searchColaborator(String name) {
+        Artist artist = null;
+
+        for (int i = 0; i < collaborators.size() && artist == null; i++) {
+            if (collaborators.get(i).getName() == name) {
+                artist = collaborators.get(i);
+            }
+        }
+
+        return artist;
+    }
+
+    @Override
+    public int searchColaboratorPos(String name) {
+        int artist = -1;
+
+        for (int i = 0; i < collaborators.size() && artist == -1; i++) {
+            if (collaborators.get(i).getName() == name) {
+                artist = i;
+            }
+        }
+
+        return artist;
+    }
+
+    @Override
+    public boolean addColaborator(String name, String bio) {
+        boolean adding = false;
+        Artist artist = this.searchColaborator(name);
+
+        if (artist == null) {
+            collaborators.add(new Artist(name, bio));
+            adding = true;
+        }
+
+        return adding;
+    }
+
+    @Override
+    public Artist deleteColaborator(String name) {
+        return collaborators.remove(this.searchColaboratorPos(name));
+    }
+
+    @Override
+    public double calculateSize() {
+        return fileSize;
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Interface/MultimediaContent.java =====
+
+package Logic.Interface;
+
+import Logic.Class.Artist;
+
+public interface MultimediaContent {
+    double calculateSize();
+    void print();
+    int searchColaboratorPos(String name);
+    boolean addColaborator(String name, String bio);
+    Artist deleteColaborator(String name);
+    Artist searchColaborator(String name);
+    String getTitle();
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Interface/PricingStrategy.java =====
+
+package Logic.Interface;
+
+public interface PricingStrategy {
+    double calculatePrice();
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/RecordingService.java =====
+
+package Logic.Class;
+
+public class RecordingService {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    private double baseCost;
+    private double dataCostPerGB;
+    private double dataSizeGB;
+
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+    public RecordingService(double baseCost, double dataCostPerGB, double dataSizeGB) {
+        this.setBaseCost(baseCost);
+        this.setDataCostPerGB(dataCostPerGB);
+        this.setDataSizeGB(dataSizeGB);
+    }
+
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public double getBaseCost() {
+        return baseCost;
+    }
+    public void setBaseCost(double baseCost) {
+        this.baseCost = baseCost;
+    }
+    public double getDataCostPerGB() {
+        return dataCostPerGB;
+    }
+    public void setDataCostPerGB(double dataCostPerGB) {
+        this.dataCostPerGB = dataCostPerGB;
+    }
+    public double getDataSizeGB() {
+        return dataSizeGB;
+    }
+
+    public void setDataSizeGB(double dataSizeGB) {
+        this.dataSizeGB = dataSizeGB;
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    public void print() {
+            
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/Album.java =====
+
+package Logic.Class;
+
+import java.util.ArrayList;
+
+import Logic.Utils;
+
+public class Album {
+/*
+* 
+* -------------Attribute---------------
+* 
+*/
+    private String title;
+    private ArrayList<Song> songs;
+    
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+    public Album(String title, ArrayList<Song> songs) {
+        this.setTitle(title);
+        this.setSongs(songs);
+    }
+    
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        if (Utils.validarSoloLetras(title)) {
+            this.title = title;
+        } else {
+            throw new IllegalArgumentException("The title contains numbers or strange characters.");
+        }
+    }
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(ArrayList<Song> songs) {
+        this.songs = songs;
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+
+    public Song searchSong(String title) {
+        Song song = null;
+
+        for (int i = 0; i < songs.size() && song == null; i++) {
+            if (songs.get(i).getTitle() == title) {
+                song = songs.get(i);
+            }
+        }
+
+        return song;
+    }
+    
+    public int searchSongPos(String title) {
+        int pos = -1;
+
+        for (int i = 0; i < songs.size() && pos == -1; i++) {
+            if (songs.get(i).getTitle() == title) {
+                pos = i;
+            }
+        }
+
+        return pos;
+    }
+
+    public boolean addSong(Song song) {
+        boolean adding = false;
+        Song s = this.searchSong(song.getTitle());
+
+        if (s != null) {
+            songs.add(song);
+            adding = true;
+        }
+
+        return adding;
+    }
+
+    public Song deleteSong(String title) {
+        return songs.remove(this.searchSongPos(title));
+    }
+    
+    public double totalSize() {
+        double totalSize = 0;
+
+        for (Song s : songs) {
+            totalSize += s.calculateSize();
+        }
+
+        return totalSize;
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/Disc.java =====
+
+package Logic.Class;
+
+import java.util.ArrayList;
+
+import Logic.Abstract.MusicalProduct;
+import Logic.Enum.SolidDisc;
+import Logic.Interface.MultimediaContent;
+
+public class Disc extends MusicalProduct {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    private ArrayList<MultimediaContent> content;
+    
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+    public Disc(double price, SolidDisc mediaType, ArrayList<MultimediaContent> content) {
+        super(price, mediaType);
+        this.setContent(content);
+    }
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public ArrayList<MultimediaContent> getContent() {
+        return content;
+    }
+
+    public void setContent(ArrayList<MultimediaContent> content) {
+        this.content = content;
+    }
+
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    @Override
+    public void print() {
+        System.out.println("-----Disc-----");
+        super.print();
+        for (MultimediaContent m : content) {
+            System.out.println("Content: ");
+            m.print();
+        }
+    }
+
+    public MultimediaContent searchContent(String title) {
+        MultimediaContent m = null;
+
+        for (int i = 0; i < content.size() && m == null; i++) {
+            if (content.get(i).getTitle() == title) {
+                m = content.get(i);
+            }
+        }
+
+        return m;
+    }
+
+    public int searchContentPos(String title) {
+        int pos = -1;
+
+        for (int i = 0; i < content.size() && pos == -1; i++) {
+            if (content.get(i).getTitle() == title) {
+                pos = i;
+            }
+        }
+
+        return pos;
+    }
+
+    public boolean addContent(MultimediaContent content) {
+        boolean adding = false;
+        MultimediaContent cont = this.searchContent(content.getTitle());
+
+        if (cont == null) {
+            adding = true;
+            this.content.add(content);
+        }
+
+        return adding;
+    }
+
+    public MultimediaContent deleteContent(String title) {
+        return content.remove(this.searchContentPos(title));
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/VideoClip.java =====
+
+package Logic.Class;
+
+import java.util.ArrayList;
+
+import Logic.Abstract.MediaContentBase;
+
+public class VideoClip extends MediaContentBase {
+/*
+ * 
+ * -------------Attributes---------------
+ * 
+ */
+    private String resolution;
+    
+/*
+ * 
+ * -------------Constructors---------------
+ * 
+ */
+public VideoClip(String title, String genre, int duration, Artist author, Artist performer,
+        ArrayList<Artist> collaborators, double fileSize, String resolution) {
+    super(title, genre, duration, author, performer, collaborators, fileSize);
+    this.setResolution(resolution);
+}
+
+/*
+ * 
+ * -------------Gets and Sets---------------
+ * 
+ */
+
+    public String getResolution() {
+        return resolution;
+    }
+
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
+    }
+
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    @Override
+    public double calculateSize() {
+        return super.calculateSize();
+    }
+
+    @Override
+    public void print() {
+        super.print();
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/Song.java =====
+
+package Logic.Class;
+
+import java.util.ArrayList;
+
+import Logic.Abstract.MediaContentBase;
+
+public class Song extends MediaContentBase {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    private Album album;
+
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+public Song(String title, String genre, int duration, Artist author, Artist performer,
+        ArrayList<Artist> collaborators, double fileSize, Album album) {
+    super(title, genre, duration, author, performer, collaborators, fileSize);
+    this.setAlbum(album);
+}
+    
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    @Override
+    public double calculateSize() {
+        return album.totalSize();
+    }
+
+    @Override
+    public void print() {
+        super.print();
+    }
+
+    public boolean isSongOfSameAlbum(Song song) {
+        boolean isSOSA = false;
+        Song s = album.searchSong(song.getTitle());
+
+        if (s != null) {
+            isSOSA = true;
+        }
+
+        return isSOSA;
+    }
+    
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/Artist.java =====
+
+package Logic.Class;
+
+import Logic.Utils;
+
+public class Artist {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    private String name;
+    private String bio;
+    
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+    public Artist(String name, String bio) {
+        this.setName(name);
+        this.setBio(bio);
+    }
+    
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (Utils.validarSoloLetras(name)) {
+            this.name = name;
+        } else {
+            throw new IllegalArgumentException("The name contains numbers or strange characters.");
+        } 
+    }
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        if (Utils.validarLetrasCaracteresPermitidos(bio)) {
+            this.bio = bio;
+        } else {
+            throw new IllegalArgumentException("The bio contains numbers or strange characters.");
+        }
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+
+    public void print() {
+        System.out.println("-----Artist-----");
+        System.out.println("Name: " + name);
+        System.out.println("Bio: " + bio);    
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/Employee.java =====
+
+package Logic.Class;
+
+import java.util.ArrayList;
+
+import Logic.Utils;
+import Logic.Enum.EducationLevel;
+
+public class Employee {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    private String firstName;
+    private String lastName;
+    private String idNumber;
+    private String employeeNumber;
+    private double salary;
+    private EducationLevel educationLevel;
+    private String role;
+    
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+
+    public Employee(String firstName, String lastName, String idNumber, double salary,
+            EducationLevel educationLevel, String role, ArrayList<Employee> employees) {
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setIdNumber(idNumber);
+        this.setEmployeeNumber(employees);
+        this.setSalary(salary);
+        this.setEducationLevel(educationLevel);
+        this.setRole(role);
+    }
+
+    public Employee(String firstName, String lastName, String idNumber, double salary,
+            EducationLevel educationLevel, String role, ArrayList<Employee> employees, boolean pr) {
+        this.firstName = firstName;
+        this.setLastName(lastName);
+        this.setIdNumber(idNumber);
+        this.setEmployeeNumber(employees);
+        this.setSalary(salary);
+        this.setEducationLevel(educationLevel);
+        this.setRole(role);
+    }
+    
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        if (Utils.validarSoloLetras(firstName)) {
+            this.firstName = firstName;
+        } else {
+            throw new IllegalArgumentException("The name contains numbers or strange characters.");
+        }
+        
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        if (Utils.validarSoloLetras(lastName)) {
+            this.lastName = lastName;
+        } else {
+            throw new IllegalArgumentException("The last name contains numbers or strange characters."); 
+        }
+        
+    }
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        if (Utils.validarCarnetIdentidad(idNumber)) {
+            this.idNumber = idNumber;
+        } else {
+            throw new IllegalArgumentException("The identity card must be in the format YYMMDD#####");
+        }
+        
+    }
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+    public void setEmployeeNumber(ArrayList<Employee> employees) {
+        this.employeeNumber = Utils.generarNumeroTrabajadorUnico(employees);
+    }
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        if (Utils.validarRangoDouble(salary, 3000, 20000)) {
+            this.salary = salary;
+        } else {
+            throw new IllegalArgumentException("The minimum wage of a worker must be 3000 and the maximum is around 20,000.");
+        }
+    }
+    public EducationLevel getEducationLevel() {
+        return educationLevel;
+    }
+    public void setEducationLevel(EducationLevel educationLevel) {
+        this.educationLevel = educationLevel;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        if (Utils.validarSoloLetras(role)) {
+            this.role = role;
+        } else {
+            throw new IllegalArgumentException("The role contains numbers or strange characters.");
+        }
+        
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+    public void print() {
+        System.out.println("-----Employee-----");
+        System.out.println("Employee: " + this.firstName + " " + this.lastName);
+        System.out.println("Id: " + this.idNumber);
+        System.out.println("Id Employee: " + this.employeeNumber);
+        System.out.println("Education Level: " + this.educationLevel);
+        System.out.println("Salary: " + this.salary);
+        System.out.println("Role: " + this.role);
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Class/Store.java =====
+
+package Logic.Class;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import Logic.Abstract.MusicalProduct;
+
+public class Store {
+/*
+* 
+* -------------Attributes---------------
+* 
+*/
+    private String name;
+    private String address;
+    private String phone;
+    private Employee manager;
+    private LocalDate managerStartDate;
+    private ArrayList<Employee> employees;
+    private ArrayList<MusicalProduct> products;
+    private ArrayList<RecordingService> customRecordingServices;
+
+/*
+* 
+* -------------Constructors---------------
+* 
+*/
+
+    public Store(String name, String address, String phone, Employee manager, LocalDate managerStartDate) {
+        this.setName(name);
+        this.setAddress(address);
+        this.setPhone(phone);
+        this.setManager(manager);
+        this.setManagerStartDate(managerStartDate);
+        this.employees = new ArrayList<Employee>();
+        this.products = new ArrayList<MusicalProduct>();
+        this.customRecordingServices = new ArrayList<RecordingService>();
+    }
+
+
+
+/*
+* 
+* -------------Gets and Sets---------------
+* 
+*/
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public String getPhone() {
+        return phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public Employee getManager() {
+        return manager;
+    }
+    public void setManager(Employee manager) {
+        this.manager = manager;
+    }
+    public LocalDate getManagerStartDate() {
+        return managerStartDate;
+    }
+    public void setManagerStartDate(LocalDate managerStartDate) {
+        this.managerStartDate = managerStartDate;
+    }
+    public ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+    public void setEmployees(ArrayList<Employee> employees) {
+        this.employees = employees;
+    }
+    public ArrayList<MusicalProduct> getProducts() {
+        return products;
+    }
+    public void setProducts(ArrayList<MusicalProduct> products) {
+        this.products = products;
+    }
+    public ArrayList<RecordingService> getCustomRecordingServices() {
+        return customRecordingServices;
+    }
+
+    public void setCustomRecordingServices(ArrayList<RecordingService> customRecordingServices) {
+        this.customRecordingServices = customRecordingServices;
+    }
+    
+/*
+* 
+* -------------Methods---------------
+* 
+*/
+
+    public Employee searchEmployee(String id) {
+        Employee emp = null;
+
+        for (int i = 0; i < employees.size() && emp == null; i++) {
+            if (employees.get(i).getIdNumber() == id) {
+                emp = employees.get(i);
+            }
+        }
+
+        return emp;
+    }
+    
+    public int searchEmployeePos(String id) {
+        int pos = -1;
+
+        for (int i = 0; i < employees.size() && pos == -1; i++) {
+            if (employees.get(i).getIdNumber() == id) {
+                pos = i;
+            }
+        }
+
+        return pos;
+    }
+
+    public boolean addEmployee(Employee employee) {
+        boolean adding = false;
+        Employee emp = searchEmployee(employee.getIdNumber());
+
+        if (emp == null) {
+            adding = true;
+            this.employees.add(employee);
+        }
+
+        return adding;
+    }
+
+    public Employee deleteEmployee(String id) {
+        return employees.remove(this.searchEmployeePos(id));
+    }
+
+    public MusicalProduct searchProduct(String name) {
+        return null;
+    }
+
+    public int searchProductPos(String name) {
+        return 0;
+    }
+
+    public boolean addProduct(MusicalProduct product) {
+        return true;
+    }
+
+    public MusicalProduct deleteMusicalProduct(String name) {
+        return null;
+    }
+
+    public RecordingService searchRecordingService(String name) {
+        return null;
+    }
+
+    public int searchRecordingServicetPos(String name) {
+        return 0;
+    }
+
+    public boolean addRecordingService(MusicalProduct product) {
+        return true;
+    }
+
+    public RecordingService deleteRecordingService(String name) {
+        return null;
+    }
+
+    public void print() {
+        System.out.println("-----Store-----");
+        System.out.println("Name: " + this.name);
+        System.out.println("Address: " + this.address);
+        System.out.println("Phone: " + this.phone);
+        System.out.println("Manager: ");
+        this.manager.print();
+        System.out.println("Employees: ");
+        for (Employee e : this.employees) {
+            System.out.println("Employee: ");
+            e.print();
+        }
+        System.out.println("Products: ");
+        for (MusicalProduct m : products) {
+            System.out.println("Product: ");
+            m.print();
+        }
+        System.out.println("Recodins Services: ");
+        for (RecordingService r : customRecordingServices) {
+            System.out.println("Rec. Serv.: ");
+            r.print();
+        }
+    }
+}
+
+
+// ===== Archivo: dpoo/src/Logic/Utils.java =====
+
+package Logic;
+
+import java.time.DateTimeException;
+import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.Random;
+
+import Logic.Class.Employee;
+
+public class Utils {
+    private static String numero;
+
+    // Valida carnet de identidad cubano (YYMMDD#####)
+    public static boolean validarCarnetIdentidad(String carnet) {
+        if (carnet == null || carnet.length() != 11 || !carnet.matches("\\d{11}")) {
+            return false;
+        }
+
+        try {
+            int yy = Integer.parseInt(carnet.substring(0, 2));
+            int mm = Integer.parseInt(carnet.substring(2, 4));
+            int dd = Integer.parseInt(carnet.substring(4, 6));
+
+            // Validación de fecha usando año bisiesto como referencia
+            YearMonth yearMonth = YearMonth.of(2000, mm);
+            if (dd < 1 || dd > yearMonth.lengthOfMonth()) {
+                return false;
+            }
+
+        } catch (NumberFormatException | DateTimeException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Valida rango para valores double
+    public static boolean validarRangoDouble(double valor, double min, double max) {
+        return !Double.isNaN(valor) && valor >= min && valor <= max;
+    }
+    
+    // Valida rango para valores int
+    public static boolean validarRangoInt(int valor, int min, int max) {
+        return valor >= min && valor <= max;
+    }
+
+    // Genera número de trabajador único (8 dígitos que empiezan en 5 o 7)
+    public static String generarNumeroTrabajadorUnico(ArrayList<Employee> empleados) {
+        if (empleados == null) {
+            empleados = new ArrayList<>(); 
+        }
+
+        Random random = new Random();
+        boolean esUnico;
+        int intentos = 0;
+        final int MAX_INTENTOS = 1000;
+
+        do {
+            int primerDigito = random.nextBoolean() ? 5 : 7;
+            int resto = random.nextInt(10000000);
+            numero = String.format("%d%07d", primerDigito, resto);
+            esUnico = empleados.stream().noneMatch(e -> numero.equals(e.getEmployeeNumber()));
+            intentos++;
+        } while (!esUnico && intentos < MAX_INTENTOS);
+
+        if (intentos >= MAX_INTENTOS) {
+            throw new RuntimeException("Error generando ID único");
+        }
+
+        return numero;
+    }
+
+    // Valida que solo contenga letras
+    public static boolean validarSoloLetras(String input) {
+        return input != null && !input.isEmpty() && input.matches("^[a-zA-Z\\sáéíóúÁÉÍÓÚñÑ]+$");
+    }
+    
+    public static boolean validarLetrasCaracteresPermitidos(String input) {
+        return input != null && !input.isEmpty() && input.matches("^[a-zA-Z\\sáéíóúÁÉÍÓÚñÑ.,]+$");
+    }
+
+    // Valida formato numérico especial (8 dígitos empezando con 5 o 7)
+    public static boolean validarNumeroEspecial(String input) {
+        return input != null && input.matches("^[57]\\d{7}$");
+    }
+
+    // Método adicional sugerido: Validar formato de email
+    public static boolean validarEmail(String email) {
+        return email != null && email.matches("^[\\w.-]+@[\\w.-]+\\.\\w{2,}$");
+    }
+}
+
+
+// ===== Archivo: dpoo/src/App.java =====
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import Logic.Class.Album;
+import Logic.Class.Artist;
+import Logic.Class.Employee;
+import Logic.Class.Song;
+import Logic.Class.Store;
+import Logic.Class.VideoClip;
+import Logic.Enum.EducationLevel;
+import Logic.Interface.MultimediaContent;
+import Logic.Utils;
+
+public class App {
+    public static void main(String[] args) {
+        test();
+    }
+
+    private static void test() {
+        System.out.println("=== Pruebas de la clase Utils ===");
+
+        // Prueba de validarCarnetIdentidad
+        System.out.println("\n1. Prueba de validarCarnetIdentidad:");
+        testValidarCarnetIdentidad();
+
+        // Prueba de validarRangoDouble
+        System.out.println("\n2. Prueba de validarRangoDouble:");
+        testValidarRangoDouble();
+
+        // Prueba de generarNumeroTrabajadorUnico
+        System.out.println("\n3. Prueba de generarNumeroTrabajadorUnico:");
+        testGenerarNumeroTrabajadorUnico();
+
+        // Prueba de validarSoloLetras
+        System.out.println("\n4. Prueba de validarSoloLetras:");
+        testValidarSoloLetras();
+
+        // Prueba de validarNumeroEspecial
+        System.out.println("\n5. Prueba de validarNumeroEspecial:");
+        testValidarNumeroEspecial();
+
+        // Prueba de validarEmail
+        System.out.println("\n6. Prueba de validarEmail:");
+        testValidarEmail();
+
+        System.out.println("=== Pruebas de la clase Store ===");
+        System.out.println("\n1. Crear instancia:");
+        Employee manager = new Employee("Juan", "Perez", "01030458789", 5000, EducationLevel.Higher, "Asistente", null);
+        System.out.println("Manager: ");
+        manager.print();
+        Store store = new Store("tienda", "av57 %152&156 #152007", "58940032", manager, LocalDate.now());
+        System.out.println("Store: ");
+        store.print();
+
+        System.out.println("\n2. Crear Employees:");
+
+        System.out.println("\n3. Multimedia Interface:");
+        ArrayList<Artist> a = new ArrayList<Artist>();
+        a.add(new Artist("a", "b"));
+        MultimediaContent m = new Song("null", "null", 1, new Artist("b", "c"), new Artist("null", "null"), a, 2,
+                new Album("null", null));
+        m.print();
+        System.out.println(m instanceof Song);
+        System.out.println(m instanceof VideoClip);
+
+
+    }
+
+    private static void testValidarCarnetIdentidad() {
+        // Carnets válidos
+        String[] validos = { "00010112345", "99123198765", "01022954321" };
+        // Carnets inválidos
+        String[] invalidos = { "00013212345", "991231", "01023054321", "abcdefghijk", "0001011234X" };
+
+        System.out.println("Carnets válidos:");
+        for (String ci : validos) {
+            System.out.printf("%s: %b%n", ci, Utils.validarCarnetIdentidad(ci));
+        }
+
+        System.out.println("\nCarnets inválidos:");
+        for (String ci : invalidos) {
+            System.out.printf("%s: %b%n", ci, Utils.validarCarnetIdentidad(ci));
+        }
+    }
+
+    private static void testValidarRangoDouble() {
+        System.out.println("5.0 en rango 1-10: " + Utils.validarRangoDouble(5.0, 1, 10));
+        System.out.println("0.0 en rango 1-10: " + Utils.validarRangoDouble(0.0, 1, 10));
+        System.out.println("10.0 en rango 1-10: " + Utils.validarRangoDouble(10.0, 1, 10));
+        System.out.println("NaN en rango 1-10: " + Utils.validarRangoDouble(Double.NaN, 1, 10));
+    }
+
+    private static void testGenerarNumeroTrabajadorUnico() {
+        ArrayList<Employee> empleados = new ArrayList<Employee>();
+        empleados.add(
+                new Employee("Juan", "Pérez", "85010112345", 5500.0, EducationLevel.University, "Desarrollador", (ArrayList<Employee>) empleados));
+        empleados.add(new Employee("Ana", "Gómez", "90050554321", 3000.0, EducationLevel.Higher, "Gerente", 
+                (ArrayList<Employee>) empleados));
+
+        System.out.println("Empleados existentes:");
+        empleados.forEach(e -> System.out.println(e.getEmployeeNumber()));
+
+        System.out.println("\nNúmeros generados:");
+        for (int i = 0; i < 5; i++) {
+            String nuevoNumero = Utils.generarNumeroTrabajadorUnico(empleados);
+            System.out.println(nuevoNumero);
+            // Agregamos a la lista para probar unicidad
+            empleados.add(
+                    new Employee("Temp" + i, "Temp", "0101010000" + i, 5000.0, EducationLevel.Secondary, "Temporal", empleados, true));
+        }
+    }
+
+    private static void testValidarSoloLetras() {
+        String[] validos = { "Juan", "María de los Ángeles", "Ñandú", "áéíóú" };
+        String[] invalidos = { "Juan123", "M@ría", "123", "" };
+
+        System.out.println("Válidos:");
+        for (String s : validos) {
+            System.out.printf("%s: %b%n", s, Utils.validarSoloLetras(s));
+        }
+
+        System.out.println("\nInválidos:");
+        for (String s : invalidos) {
+            System.out.printf("%s: %b%n", s, Utils.validarSoloLetras(s));
+        }
+    }
+
+    private static void testValidarNumeroEspecial() {
+        String[] validos = { "51234567", "79999999" };
+        String[] invalidos = { "12345678", "61234567", "5123456", "512345678", "abcdefgh" };
+
+        System.out.println("Válidos:");
+        for (String s : validos) {
+            System.out.printf("%s: %b%n", s, Utils.validarNumeroEspecial(s));
+        }
+
+        System.out.println("\nInválidos:");
+        for (String s : invalidos) {
+            System.out.printf("%s: %b%n", s, Utils.validarNumeroEspecial(s));
+        }
+    }
+
+    private static void testValidarEmail() {
+        String[] validos = { "usuario@dominio.com", "nombre.apellido@sub.dominio.com", "a@b.cd" };
+        String[] invalidos = { "usuario@", "@dominio.com", "usuario@dominio", "sin arroba.com", "" };
+
+        System.out.println("Válidos:");
+        for (String s : validos) {
+            System.out.printf("%s: %b%n", s, Utils.validarEmail(s));
+        }
+
+        System.out.println("\nInválidos:");
+        for (String s : invalidos) {
+            System.out.printf("%s: %b%n", s, Utils.validarEmail(s));
+        }
+    }
+}

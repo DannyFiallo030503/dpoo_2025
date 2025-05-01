@@ -55,7 +55,7 @@ public abstract class MusicalProduct implements PricingStrategy {
 */
     @Override
     public double calculatePrice() {
-        return 0;
+        return price;
     }
 
     public void print() {
