@@ -1,37 +1,45 @@
 package Visual;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Screen extends JFrame {
-    private JButton btnCreateStore;
+    private JPanel contentPane;
+    private MainContent mainContent;
+    private MainCreate mainCreate;
+    private CreateStorePanel createStorePanel;
 
     public Screen() {
-        // Configuración básica de la ventana
-        setTitle("Mi Aplicación");
-        System.out.println("2222222222222222222");
-        setSize(400, 300); // Tamaño de la ventana
+        setTitle("Gestión de Tienda");
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null); // Usamos Absolute Layout (null)
 
-        // Crear botón "Create Store"
-        btnCreateStore = new JButton("Create Store");
-        btnCreateStore.setBounds(150, 100, 120, 30); // (x, y, width, height)
+        contentPane = new JPanel(new java.awt.CardLayout());
+        setContentPane(contentPane);
 
-        // Acción del botón
-        btnCreateStore.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Botón presionado: Crear tienda");
-            }
-        });
+        // Inicializar paneles
+        mainContent = new MainContent(this);
+        mainCreate = new MainCreate(this);
+        createStorePanel = new CreateStorePanel(this);
 
+        // Registrar paneles
+        contentPane.add(mainContent, "MainContent");
+        contentPane.add(mainCreate, "MainCreate");
+        contentPane.add(createStorePanel, "CreateStorePanel");
 
-        // Añadir botón a la ventana
-        add(btnCreateStore);
-
-        // Centrar ventana en la pantalla
+        showMainContent();
         setLocationRelativeTo(null);
+    }
+
+    public void showMainContent() {
+        ((java.awt.CardLayout) contentPane.getLayout()).show(contentPane, "MainContent");
+    }
+
+    public void showMainCreate() {
+        ((java.awt.CardLayout) contentPane.getLayout()).show(contentPane, "MainCreate");
+        mainCreate.updateButtonVisibility();
+    }
+
+    public void showCreateStorePanel() {
+        ((java.awt.CardLayout) contentPane.getLayout()).show(contentPane, "CreateStorePanel");
     }
 }

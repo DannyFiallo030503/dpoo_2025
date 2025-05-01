@@ -1,3 +1,4 @@
+package Main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -13,9 +14,10 @@ import Logic.Utils;
 import Visual.Screen;
 
 public class App {
+
+    public static Store store = null;
     public static void main(String[] args) {
-        // test();
-        Screen screen = new Screen();
+        Visual.Screen screen = new Screen();
         screen.setVisible(true);
     }
 

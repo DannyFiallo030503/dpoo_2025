@@ -37,7 +37,11 @@ public class Store {
         this.customRecordingServices = new ArrayList<RecordingService>();
     }
 
-
+    public Store(String name, String address, String phone) {
+        this.setName(name);
+        this.setAddress(address);
+        this.setPhone(phone);
+    }
 
 /*
 * 
