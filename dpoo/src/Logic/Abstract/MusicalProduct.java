@@ -1,5 +1,6 @@
 package Logic.Abstract;
 
+import Logic.Utils;
 import Logic.Enum.SolidDisc;
 import Logic.Interface.PricingStrategy;
 
@@ -30,8 +31,14 @@ public abstract class MusicalProduct implements PricingStrategy {
     public double getPrice() {
         return price;
     }
+
     public void setPrice(double price) {
-        this.price = price;
+        if (Utils.validarRangoDouble(price, 1, 10000)) {
+            this.price = price;
+        } else {
+            throw new IllegalArgumentException("The minimum price must be 1 and the maximum is around 10,000.");
+        }
+        
     }
     public SolidDisc getMediaType() {
         return mediaType;

@@ -50,4 +50,44 @@ public class Disc extends MusicalProduct {
             m.print();
         }
     }
+
+    public MultimediaContent searchContent(String title) {
+        MultimediaContent m = null;
+
+        for (int i = 0; i < content.size() && m == null; i++) {
+            if (content.get(i).getTitle() == title) {
+                m = content.get(i);
+            }
+        }
+
+        return m;
+    }
+
+    public int searchContentPos(String title) {
+        int pos = -1;
+
+        for (int i = 0; i < content.size() && pos == -1; i++) {
+            if (content.get(i).getTitle() == title) {
+                pos = i;
+            }
+        }
+
+        return pos;
+    }
+
+    public boolean addContent(MultimediaContent content) {
+        boolean adding = false;
+        MultimediaContent cont = this.searchContent(content.getTitle());
+
+        if (cont == null) {
+            adding = true;
+            this.content.add(content);
+        }
+
+        return adding;
+    }
+
+    public MultimediaContent deleteContent(String title) {
+        return content.remove(this.searchContentPos(title));
+    }
 }

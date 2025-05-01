@@ -1,8 +1,14 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import Logic.Class.Album;
+import Logic.Class.Artist;
 import Logic.Class.Employee;
+import Logic.Class.Song;
 import Logic.Class.Store;
+import Logic.Class.VideoClip;
 import Logic.Enum.EducationLevel;
+import Logic.Interface.MultimediaContent;
 import Logic.Utils;
 
 public class App {
@@ -39,7 +45,7 @@ public class App {
 
         System.out.println("=== Pruebas de la clase Store ===");
         System.out.println("\n1. Crear instancia:");
-        Employee manager = new Employee("Juan", "Perez", "01030458789", 1000, EducationLevel.Higher, "Asistente", null);
+        Employee manager = new Employee("Juan", "Perez", "01030458789", 5000, EducationLevel.Higher, "Asistente", null);
         System.out.println("Manager: ");
         manager.print();
         Store store = new Store("tienda", "av57 %152&156 #152007", "58940032", manager, LocalDate.now());
@@ -47,6 +53,17 @@ public class App {
         store.print();
 
         System.out.println("\n2. Crear Employees:");
+
+        System.out.println("\n3. Multimedia Interface:");
+        ArrayList<Artist> a = new ArrayList<Artist>();
+        a.add(new Artist("a", "b"));
+        MultimediaContent m = new Song("null", "null", 1, new Artist("b", "c"), new Artist("null", "null"), a, 2,
+                new Album("null", null));
+        m.print();
+        System.out.println(m instanceof Song);
+        System.out.println(m instanceof VideoClip);
+
+
     }
 
     private static void testValidarCarnetIdentidad() {
@@ -76,7 +93,7 @@ public class App {
     private static void testGenerarNumeroTrabajadorUnico() {
         ArrayList<Employee> empleados = new ArrayList<Employee>();
         empleados.add(
-                new Employee("Juan", "Pérez", "85010112345", 2500.0, EducationLevel.University, "Desarrollador", (ArrayList<Employee>) empleados));
+                new Employee("Juan", "Pérez", "85010112345", 5500.0, EducationLevel.University, "Desarrollador", (ArrayList<Employee>) empleados));
         empleados.add(new Employee("Ana", "Gómez", "90050554321", 3000.0, EducationLevel.Higher, "Gerente", 
                 (ArrayList<Employee>) empleados));
 
@@ -89,7 +106,7 @@ public class App {
             System.out.println(nuevoNumero);
             // Agregamos a la lista para probar unicidad
             empleados.add(
-                    new Employee("Temp" + i, "Temp", "0101010000" + i, 1000.0, EducationLevel.Secondary, "Temporal", empleados));
+                    new Employee("Temp" + i, "Temp", "0101010000" + i, 5000.0, EducationLevel.Secondary, "Temporal", empleados, true));
         }
     }
 

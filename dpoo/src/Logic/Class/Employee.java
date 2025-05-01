@@ -35,6 +35,17 @@ public class Employee {
         this.setEducationLevel(educationLevel);
         this.setRole(role);
     }
+
+    public Employee(String firstName, String lastName, String idNumber, double salary,
+            EducationLevel educationLevel, String role, ArrayList<Employee> employees, boolean pr) {
+        this.firstName = firstName;
+        this.setLastName(lastName);
+        this.setIdNumber(idNumber);
+        this.setEmployeeNumber(employees);
+        this.setSalary(salary);
+        this.setEducationLevel(educationLevel);
+        this.setRole(role);
+    }
     
 /*
 * 

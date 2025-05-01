@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Logic.Abstract.MediaContentBase;
 
-public class Song extends MediaContentBase{
+public class Song extends MediaContentBase {
 /*
 * 
 * -------------Attributes---------------
@@ -43,7 +43,7 @@ public Song(String title, String genre, int duration, Artist author, Artist perf
 */
     @Override
     public double calculateSize() {
-        return 0;
+        return album.totalSize();
     }
 
     @Override
@@ -51,4 +51,15 @@ public Song(String title, String genre, int duration, Artist author, Artist perf
         super.print();
     }
 
+    public boolean isSongOfSameAlbum(Song song) {
+        boolean isSOSA = false;
+        Song s = album.searchSong(song.getTitle());
+
+        if (s != null) {
+            isSOSA = true;
+        }
+
+        return isSOSA;
+    }
+    
 }
