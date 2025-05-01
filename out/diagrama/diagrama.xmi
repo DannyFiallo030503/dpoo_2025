@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?><XMI xmlns:UML="href://org.omg/UML/1.3" xmi.version="1.1">
+    <XMI.header>
+        <XMI.documentation>
+            <XMI.exporter>PlantUML</XMI.exporter>
+            <XMI.exporterVersion>1.2024.3</XMI.exporterVersion>
+        </XMI.documentation>
+        <XMI.metamodel xmi.name="UML" xmi.version="1.4"/>
+    </XMI.header>
+    <XMI.content>
+        <UML:Model name="PlantUML" xmi.id="model1">
+            <UML:Namespace.ownedElement>
+                <UML:Class name="Utils" xmi.id="cl0002">
+                    <UML:Classifier.feature>
+                        <UML:Operation name="validarCarnetIdentidad(carnet: String): boolean" visibility="public" xmi.id="att39"/>
+                        <UML:Operation name="validarRangoDouble(valor: double, min: double, max: double): boolean" visibility="public" xmi.id="att40"/>
+                        <UML:Operation name="validarRangoInt(valor: int, min: int, max: int): boolean" visibility="public" xmi.id="att41"/>
+                        <UML:Operation name="generarNumeroTrabajadorUnico(empleados: ArrayList&lt;Employee&gt;): String" visibility="public" xmi.id="att42"/>
+                        <UML:Operation name="validarSoloLetras(input: String): boolean" visibility="public" xmi.id="att43"/>
+                        <UML:Operation name="validarLetrasCaracteresPermitidos(input: String): boolean" visibility="public" xmi.id="att44"/>
+                        <UML:Operation name="validarNumeroEspecial(input: String): boolean" visibility="public" xmi.id="att45"/>
+                        <UML:Operation name="validarEmail(email: String): boolean" visibility="public" xmi.id="att46"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="SolidDisc" xmi.id="cl0003">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="CD" xmi.id="att47"/>
+                        <UML:Attribute name="DVD" xmi.id="att48"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="EducationLevel" xmi.id="cl0004">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="Primary" xmi.id="att49"/>
+                        <UML:Attribute name="Secondary" xmi.id="att50"/>
+                        <UML:Attribute name="Higher" xmi.id="att51"/>
+                        <UML:Attribute name="University" xmi.id="att52"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="MusicalProduct" xmi.id="cl0005">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="price : double" visibility="protected" xmi.id="att53"/>
+                        <UML:Attribute name="mediaType : SolidDisc" visibility="protected" xmi.id="att54"/>
+                        <UML:Operation name="getPrice(): double" visibility="public" xmi.id="att55"/>
+                        <UML:Operation name="setPrice(price: double): void" visibility="public" xmi.id="att56"/>
+                        <UML:Operation name="getMediaType(): SolidDisc" visibility="public" xmi.id="att57"/>
+                        <UML:Operation name="setMediaType(mediaType: SolidDisc): void" visibility="public" xmi.id="att58"/>
+                        <UML:Operation name="calculatePrice(): double" visibility="public" xmi.id="att59"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att60"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class isInterface="true" name="PricingStrategy" xmi.id="cl0006">
+                    <UML:Classifier.feature>
+                        <UML:Operation name="calculatePrice(): double" visibility="public" xmi.id="att61"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="MediaContentBase" xmi.id="cl0008">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="title : String" visibility="protected" xmi.id="att62"/>
+                        <UML:Attribute name="genre : String" visibility="protected" xmi.id="att63"/>
+                        <UML:Attribute name="duration : int" visibility="protected" xmi.id="att64"/>
+                        <UML:Attribute name="fileSize : double" visibility="protected" xmi.id="att65"/>
+                        <UML:Operation name="getTitle(): String" visibility="public" xmi.id="att66"/>
+                        <UML:Operation name="setTitle(title: String): void" visibility="public" xmi.id="att67"/>
+                        <UML:Operation name="getGenre(): String" visibility="public" xmi.id="att68"/>
+                        <UML:Operation name="setGenre(genre: String): void" visibility="public" xmi.id="att69"/>
+                        <UML:Operation name="getDuration(): int" visibility="public" xmi.id="att70"/>
+                        <UML:Operation name="setDuration(duration: int): void" visibility="public" xmi.id="att71"/>
+                        <UML:Operation name="getFileSize(): double" visibility="public" xmi.id="att72"/>
+                        <UML:Operation name="setFileSize(fileSize: double): void" visibility="public" xmi.id="att73"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att74"/>
+                        <UML:Operation name="searchColaborator(name: String): Artist" visibility="public" xmi.id="att75"/>
+                        <UML:Operation name="searchColaboratorPos(name: String): int" visibility="public" xmi.id="att76"/>
+                        <UML:Operation name="addColaborator(name: String, bio: String): boolean" visibility="public" xmi.id="att77"/>
+                        <UML:Operation name="deleteColaborator(name: String): Artist" visibility="public" xmi.id="att78"/>
+                        <UML:Operation name="calculateSize(): double" visibility="public" xmi.id="att79"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class isInterface="true" name="MultimediaContent" xmi.id="cl0009">
+                    <UML:Classifier.feature>
+                        <UML:Operation name="calculateSize(): double" visibility="public" xmi.id="att80"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att81"/>
+                        <UML:Operation name="searchColaboratorPos(name: String): int" visibility="public" xmi.id="att82"/>
+                        <UML:Operation name="addColaborator(name: String, bio: String): boolean" visibility="public" xmi.id="att83"/>
+                        <UML:Operation name="deleteColaborator(name: String): Artist" visibility="public" xmi.id="att84"/>
+                        <UML:Operation name="searchColaborator(name: String): Artist" visibility="public" xmi.id="att85"/>
+                        <UML:Operation name="getTitle(): String" visibility="public" xmi.id="att86"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="RecordingService" xmi.id="cl0011">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="baseCost : double" visibility="private" xmi.id="att87"/>
+                        <UML:Attribute name="dataCostPerGB : double" visibility="private" xmi.id="att88"/>
+                        <UML:Attribute name="dataSizeGB : double" visibility="private" xmi.id="att89"/>
+                        <UML:Operation name="getBaseCost(): double" visibility="public" xmi.id="att90"/>
+                        <UML:Operation name="setBaseCost(baseCost: double): void" visibility="public" xmi.id="att91"/>
+                        <UML:Operation name="getDataCostPerGB(): double" visibility="public" xmi.id="att92"/>
+                        <UML:Operation name="setDataCostPerGB(dataCostPerGB: double): void" visibility="public" xmi.id="att93"/>
+                        <UML:Operation name="getDataSizeGB(): double" visibility="public" xmi.id="att94"/>
+                        <UML:Operation name="setDataSizeGB(dataSizeGB: double): void" visibility="public" xmi.id="att95"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att96"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Album" xmi.id="cl0012">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="title : String" visibility="private" xmi.id="att97"/>
+                        <UML:Attribute name="songs : ArrayList&lt;Song&gt;" visibility="private" xmi.id="att98"/>
+                        <UML:Operation name="getTitle(): String" visibility="public" xmi.id="att99"/>
+                        <UML:Operation name="setTitle(title: String): void" visibility="public" xmi.id="att100"/>
+                        <UML:Operation name="getSongs(): ArrayList&lt;Song&gt;" visibility="public" xmi.id="att101"/>
+                        <UML:Operation name="setSongs(songs: ArrayList&lt;Song&gt;): void" visibility="public" xmi.id="att102"/>
+                        <UML:Operation name="searchSong(title: String): Song" visibility="public" xmi.id="att103"/>
+                        <UML:Operation name="searchSongPos(title: String): int" visibility="public" xmi.id="att104"/>
+                        <UML:Operation name="addSong(song: Song): boolean" visibility="public" xmi.id="att105"/>
+                        <UML:Operation name="deleteSong(title: String): Song" visibility="public" xmi.id="att106"/>
+                        <UML:Operation name="totalSize(): double" visibility="public" xmi.id="att107"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Disc" xmi.id="cl0013">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="content : ArrayList&lt;MultimediaContent&gt;" visibility="private" xmi.id="att108"/>
+                        <UML:Operation name="getContent(): ArrayList&lt;MultimediaContent&gt;" visibility="public" xmi.id="att109"/>
+                        <UML:Operation name="setContent(content: ArrayList&lt;MultimediaContent&gt;): void" visibility="public" xmi.id="att110"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att111"/>
+                        <UML:Operation name="searchContent(title: String): MultimediaContent" visibility="public" xmi.id="att112"/>
+                        <UML:Operation name="searchContentPos(title: String): int" visibility="public" xmi.id="att113"/>
+                        <UML:Operation name="addContent(content: MultimediaContent): boolean" visibility="public" xmi.id="att114"/>
+                        <UML:Operation name="deleteContent(title: String): MultimediaContent" visibility="public" xmi.id="att115"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="VideoClip" xmi.id="cl0015">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="resolution : String" visibility="private" xmi.id="att116"/>
+                        <UML:Operation name="getResolution(): String" visibility="public" xmi.id="att117"/>
+                        <UML:Operation name="setResolution(resolution: String): void" visibility="public" xmi.id="att118"/>
+                        <UML:Operation name="calculateSize(): double" visibility="public" xmi.id="att119"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att120"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Song" xmi.id="cl0017">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="album : Album" visibility="private" xmi.id="att121"/>
+                        <UML:Operation name="getAlbum(): Album" visibility="public" xmi.id="att122"/>
+                        <UML:Operation name="setAlbum(album: Album): void" visibility="public" xmi.id="att123"/>
+                        <UML:Operation name="calculateSize(): double" visibility="public" xmi.id="att124"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att125"/>
+                        <UML:Operation name="isSongOfSameAlbum(song: Song): boolean" visibility="public" xmi.id="att126"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Artist" xmi.id="cl0019">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="name : String" visibility="private" xmi.id="att127"/>
+                        <UML:Attribute name="bio : String" visibility="private" xmi.id="att128"/>
+                        <UML:Operation name="getName(): String" visibility="public" xmi.id="att129"/>
+                        <UML:Operation name="setName(name: String): void" visibility="public" xmi.id="att130"/>
+                        <UML:Operation name="getBio(): String" visibility="public" xmi.id="att131"/>
+                        <UML:Operation name="setBio(bio: String): void" visibility="public" xmi.id="att132"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att133"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Employee" xmi.id="cl0020">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="firstName : String" visibility="private" xmi.id="att134"/>
+                        <UML:Attribute name="lastName : String" visibility="private" xmi.id="att135"/>
+                        <UML:Attribute name="idNumber : String" visibility="private" xmi.id="att136"/>
+                        <UML:Attribute name="employeeNumber : String" visibility="private" xmi.id="att137"/>
+                        <UML:Attribute name="salary : double" visibility="private" xmi.id="att138"/>
+                        <UML:Attribute name="educationLevel : EducationLevel" visibility="private" xmi.id="att139"/>
+                        <UML:Attribute name="role : String" visibility="private" xmi.id="att140"/>
+                        <UML:Operation name="getFirstName(): String" visibility="public" xmi.id="att141"/>
+                        <UML:Operation name="setFirstName(firstName: String): void" visibility="public" xmi.id="att142"/>
+                        <UML:Operation name="getLastName(): String" visibility="public" xmi.id="att143"/>
+                        <UML:Operation name="setLastName(lastName: String): void" visibility="public" xmi.id="att144"/>
+                        <UML:Operation name="getIdNumber(): String" visibility="public" xmi.id="att145"/>
+                        <UML:Operation name="setIdNumber(idNumber: String): void" visibility="public" xmi.id="att146"/>
+                        <UML:Operation name="getEmployeeNumber(): String" visibility="public" xmi.id="att147"/>
+                        <UML:Operation name="setEmployeeNumber(employees: ArrayList&lt;Employee&gt;): void" visibility="public" xmi.id="att148"/>
+                        <UML:Operation name="getSalary(): double" visibility="public" xmi.id="att149"/>
+                        <UML:Operation name="setSalary(salary: double): void" visibility="public" xmi.id="att150"/>
+                        <UML:Operation name="getEducationLevel(): EducationLevel" visibility="public" xmi.id="att151"/>
+                        <UML:Operation name="setEducationLevel(educationLevel: EducationLevel): void" visibility="public" xmi.id="att152"/>
+                        <UML:Operation name="getRole(): String" visibility="public" xmi.id="att153"/>
+                        <UML:Operation name="setRole(role: String): void" visibility="public" xmi.id="att154"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att155"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+                <UML:Class name="Store" xmi.id="cl0021">
+                    <UML:Classifier.feature>
+                        <UML:Attribute name="name : String" visibility="private" xmi.id="att156"/>
+                        <UML:Attribute name="address : String" visibility="private" xmi.id="att157"/>
+                        <UML:Attribute name="phone : String" visibility="private" xmi.id="att158"/>
+                        <UML:Attribute name="manager : Employee" visibility="private" xmi.id="att159"/>
+                        <UML:Attribute name="managerStartDate : LocalDate" visibility="private" xmi.id="att160"/>
+                        <UML:Attribute name="employees : ArrayList&lt;Employee&gt;" visibility="private" xmi.id="att161"/>
+                        <UML:Attribute name="products : ArrayList&lt;MusicalProduct&gt;" visibility="private" xmi.id="att162"/>
+                        <UML:Attribute name="customRecordingServices : ArrayList&lt;RecordingService&gt;" visibility="private" xmi.id="att163"/>
+                        <UML:Operation name="getName(): String" visibility="public" xmi.id="att164"/>
+                        <UML:Operation name="setName(name: String): void" visibility="public" xmi.id="att165"/>
+                        <UML:Operation name="getAddress(): String" visibility="public" xmi.id="att166"/>
+                        <UML:Operation name="setAddress(address: String): void" visibility="public" xmi.id="att167"/>
+                        <UML:Operation name="getPhone(): String" visibility="public" xmi.id="att168"/>
+                        <UML:Operation name="setPhone(phone: String): void" visibility="public" xmi.id="att169"/>
+                        <UML:Operation name="getManager(): Employee" visibility="public" xmi.id="att170"/>
+                        <UML:Operation name="setManager(manager: Employee): void" visibility="public" xmi.id="att171"/>
+                        <UML:Operation name="getManagerStartDate(): LocalDate" visibility="public" xmi.id="att172"/>
+                        <UML:Operation name="setManagerStartDate(managerStartDate: LocalDate): void" visibility="public" xmi.id="att173"/>
+                        <UML:Operation name="getEmployees(): ArrayList&lt;Employee&gt;" visibility="public" xmi.id="att174"/>
+                        <UML:Operation name="setEmployees(employees: ArrayList&lt;Employee&gt;): void" visibility="public" xmi.id="att175"/>
+                        <UML:Operation name="getProducts(): ArrayList&lt;MusicalProduct&gt;" visibility="public" xmi.id="att176"/>
+                        <UML:Operation name="setProducts(products: ArrayList&lt;MusicalProduct&gt;): void" visibility="public" xmi.id="att177"/>
+                        <UML:Operation name="getCustomRecordingServices(): ArrayList&lt;RecordingService&gt;" visibility="public" xmi.id="att178"/>
+                        <UML:Operation name="setCustomRecordingServices(customRecordingServices: ArrayList&lt;RecordingService&gt;): void" visibility="public" xmi.id="att179"/>
+                        <UML:Operation name="searchEmployee(id: String): Employee" visibility="public" xmi.id="att180"/>
+                        <UML:Operation name="searchEmployeePos(id: String): int" visibility="public" xmi.id="att181"/>
+                        <UML:Operation name="addEmployee(employee: Employee): boolean" visibility="public" xmi.id="att182"/>
+                        <UML:Operation name="deleteEmployee(id: String): Employee" visibility="public" xmi.id="att183"/>
+                        <UML:Operation name="searchProduct(name: String): MusicalProduct" visibility="public" xmi.id="att184"/>
+                        <UML:Operation name="searchProductPos(name: String): int" visibility="public" xmi.id="att185"/>
+                        <UML:Operation name="addProduct(product: MusicalProduct): boolean" visibility="public" xmi.id="att186"/>
+                        <UML:Operation name="deleteMusicalProduct(name: String): MusicalProduct" visibility="public" xmi.id="att187"/>
+                        <UML:Operation name="searchRecordingService(name: String): RecordingService" visibility="public" xmi.id="att188"/>
+                        <UML:Operation name="searchRecordingServicetPos(name: String): int" visibility="public" xmi.id="att189"/>
+                        <UML:Operation name="addRecordingService(product: MusicalProduct): boolean" visibility="public" xmi.id="att190"/>
+                        <UML:Operation name="deleteRecordingService(name: String): RecordingService" visibility="public" xmi.id="att191"/>
+                        <UML:Operation name="print(): void" visibility="public" xmi.id="att192"/>
+                    </UML:Classifier.feature>
+                </UML:Class>
+            </UML:Namespace.ownedElement>
+        </UML:Model>
+    </XMI.content>
+</XMI>

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Logic.Abstract.MediaContentBase;
 
-public class VideoClip extends MediaContentBase{
+public class VideoClip extends MediaContentBase {
 /*
  * 
  * -------------Attributes---------------
@@ -45,7 +45,7 @@ public VideoClip(String title, String genre, int duration, Artist author, Artist
 */
     @Override
     public double calculateSize() {
-        return 0;
+        return super.calculateSize();
     }
 
     @Override

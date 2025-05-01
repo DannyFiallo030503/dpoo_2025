@@ -37,7 +37,11 @@ public class Store {
         this.customRecordingServices = new ArrayList<RecordingService>();
     }
 
-
+    public Store(String name, String address, String phone) {
+        this.setName(name);
+        this.setAddress(address);
+        this.setPhone(phone);
+    }
 
 /*
 * 
@@ -100,27 +104,99 @@ public class Store {
 * 
 */
 
-public void print() {
-    System.out.println("-----Store-----");
-    System.out.println("Name: " + this.name);
-    System.out.println("Address: " + this.address);
-    System.out.println("Phone: " + this.phone);
-    System.out.println("Manager: ");
-    this.manager.print();
-    System.out.println("Employees: ");
-    for (Employee e : this.employees) {
-        System.out.println("Employee: ");
-        e.print();
+    public Employee searchEmployee(String id) {
+        Employee emp = null;
+
+        for (int i = 0; i < employees.size() && emp == null; i++) {
+            if (employees.get(i).getIdNumber() == id) {
+                emp = employees.get(i);
+            }
+        }
+
+        return emp;
     }
-    System.out.println("Products: ");
-    for (MusicalProduct m : products) {
-        System.out.println("Product: ");
-        m.print();
+    
+    public int searchEmployeePos(String id) {
+        int pos = -1;
+
+        for (int i = 0; i < employees.size() && pos == -1; i++) {
+            if (employees.get(i).getIdNumber() == id) {
+                pos = i;
+            }
+        }
+
+        return pos;
     }
-    System.out.println("Recodins Services: ");
-    for (RecordingService r : customRecordingServices) {
-        System.out.println("Rec. Serv.: ");
-        r.print();
+
+    public boolean addEmployee(Employee employee) {
+        boolean adding = false;
+        Employee emp = searchEmployee(employee.getIdNumber());
+
+        if (emp == null) {
+            adding = true;
+            this.employees.add(employee);
+        }
+
+        return adding;
     }
-}
+
+    public Employee deleteEmployee(String id) {
+        return employees.remove(this.searchEmployeePos(id));
+    }
+
+    public MusicalProduct searchProduct(String name) {
+        return null;
+    }
+
+    public int searchProductPos(String name) {
+        return 0;
+    }
+
+    public boolean addProduct(MusicalProduct product) {
+        return true;
+    }
+
+    public MusicalProduct deleteMusicalProduct(String name) {
+        return null;
+    }
+
+    public RecordingService searchRecordingService(String name) {
+        return null;
+    }
+
+    public int searchRecordingServicetPos(String name) {
+        return 0;
+    }
+
+    public boolean addRecordingService(MusicalProduct product) {
+        return true;
+    }
+
+    public RecordingService deleteRecordingService(String name) {
+        return null;
+    }
+
+    public void print() {
+        System.out.println("-----Store-----");
+        System.out.println("Name: " + this.name);
+        System.out.println("Address: " + this.address);
+        System.out.println("Phone: " + this.phone);
+        System.out.println("Manager: ");
+        this.manager.print();
+        System.out.println("Employees: ");
+        for (Employee e : this.employees) {
+            System.out.println("Employee: ");
+            e.print();
+        }
+        System.out.println("Products: ");
+        for (MusicalProduct m : products) {
+            System.out.println("Product: ");
+            m.print();
+        }
+        System.out.println("Recodins Services: ");
+        for (RecordingService r : customRecordingServices) {
+            System.out.println("Rec. Serv.: ");
+            r.print();
+        }
+    }
 }

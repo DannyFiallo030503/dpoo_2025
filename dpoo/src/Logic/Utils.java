@@ -38,6 +38,11 @@ public class Utils {
     public static boolean validarRangoDouble(double valor, double min, double max) {
         return !Double.isNaN(valor) && valor >= min && valor <= max;
     }
+    
+    // Valida rango para valores int
+    public static boolean validarRangoInt(int valor, int min, int max) {
+        return valor >= min && valor <= max;
+    }
 
     // Genera número de trabajador único (8 dígitos que empiezan en 5 o 7)
     public static String generarNumeroTrabajadorUnico(ArrayList<Employee> empleados) {
@@ -68,6 +73,10 @@ public class Utils {
     // Valida que solo contenga letras
     public static boolean validarSoloLetras(String input) {
         return input != null && !input.isEmpty() && input.matches("^[a-zA-Z\\sáéíóúÁÉÍÓÚñÑ]+$");
+    }
+    
+    public static boolean validarLetrasCaracteresPermitidos(String input) {
+        return input != null && !input.isEmpty() && input.matches("^[a-zA-Z\\sáéíóúÁÉÍÓÚñÑ.,]+$");
     }
 
     // Valida formato numérico especial (8 dígitos empezando con 5 o 7)
